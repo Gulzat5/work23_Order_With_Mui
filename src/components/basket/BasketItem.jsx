@@ -5,7 +5,6 @@ import { ReactComponent as BasketPlus } from "../../assets/icons/plus.svg";
 import { decrementFood, incrementFood } from "../../store/basket/basketThunk";
 import { useDispatch } from "react-redux";
 import { snakbarAction } from "../../store/snackbar";
-import { type } from "@testing-library/user-event/dist/type";
 
 export const BasketItem = ({ title, price, amount, id }) => {
   const dispatch = useDispatch();
@@ -15,7 +14,7 @@ export const BasketItem = ({ title, price, amount, id }) => {
       await dispatch(
         incrementFood({
           id: id,
-          amount: amount,
+          amount: +amount,
         })
       ).unwrap();
       dispatch(snakbarAction.doSuccess());

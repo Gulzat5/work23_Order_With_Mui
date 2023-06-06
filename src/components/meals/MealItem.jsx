@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { MealsItemForm } from "./MealsItemForm";
 import { useDispatch } from "react-redux";
-import { addItem } from "../../store/basket/basketThunk";
 import { snakbarAction } from "../../store/snackbar";
+import { addItem } from "../../store/basket/basketThunk";
 
 export const MealItem = ({ meal }) => {
   const dispatch = useDispatch();
