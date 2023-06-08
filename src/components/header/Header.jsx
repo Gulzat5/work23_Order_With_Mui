@@ -1,28 +1,41 @@
-import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
-import { OrderBasket } from './OrderBasket'
-import { useSelector } from 'react-redux'
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import { OrderBasket } from "./OrderBasket";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@mui/material";
+import { AuthActions } from "../../store/auth/AuthSlice";
 
 export const Header = ({ toggleHandler }) => {
-  const [animationClass, setAnimationClass] = useState('')
-  const { items } = useSelector((state) => state.basket)
+  const [animationClass, setAnimationClass] = useState("");
+  const { isAuthorization } = useSelector((state) => state.auth);
+  const dispath = useDispatch();
+  const { items } = useSelector((state) => state.basket);
+  const navigate = useNavigate();
+
+  const logoutHandler = () => {
+    return dispath(AuthActions.logout());
+  };
 
   const plusAnimation = () => {
-    setAnimationClass('bump')
+    setAnimationClass("bump");
 
     const animationTimePlus = setTimeout(() => {
-      setAnimationClass('')
-    }, 300)
+      setAnimationClass("");
+    }, 300);
 
     return () => {
-      clearTimeout(animationTimePlus)
-    }
-  }
+      clearTimeout(animationTimePlus);
+    };
+  };
 
   useEffect(() => {
-    plusAnimation()
-  }, [items])
+    plusAnimation();
+  }, [items]);
 
+  const navigateInSignIn = (second) => {
+    navigate("signin");
+  };
   return (
     <HeaderStyle>
       <Container>
@@ -30,10 +43,23 @@ export const Header = ({ toggleHandler }) => {
         <OrderBasket className={animationClass} toggleHandler={toggleHandler}>
           Your Cart
         </OrderBasket>
+        {isAuthorization ? (
+          <Button variant="contained" color="success" onClick={logoutHandler}>
+            Logout
+          </Button>
+        ) : (
+          <Button
+            variant="contained"
+            color="success"
+            onClick={navigateInSignIn}
+          >
+            Log in
+          </Button>
+        )}
       </Container>
     </HeaderStyle>
-  )
-}
+  );
+};
 
 const HeaderStyle = styled.header`
   position: fixed;
@@ -66,19 +92,19 @@ const HeaderStyle = styled.header`
       transform: scale(1);
     }
   }
-`
+`;
 
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`
+`;
 
 const MealsText = styled.p`
-  font-family: 'Poppins';
+  font-family: "Poppins";
   font-style: normal;
   font-weight: 600;
   font-size: 38px;
   line-height: 57px;
   color: #ffffff;
-`
+`;

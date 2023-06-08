@@ -1,25 +1,26 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
-import React from 'react'
+import React from "react";
 
 export const Button = (props) => {
   const {
     children,
     onClick,
-    color = '#fff',
-    bgColor = '#8A2B06',
-    hvBgColor = '#7e2a0a',
+    color = "#fff",
+    bgColor = "#8A2B06",
+    hvBgColor = "#7e2a0a",
     hvColor,
-    acvBgColor = '#993108',
-    border = 'none',
+    acvBgColor = "#993108",
+    border = "none",
     acvColor,
     fontSize,
     fontWeight,
-    padding = '10px 24px 10px 16px',
+    padding = "10px 24px 10px 16px",
     dbBgColor,
-    dbColor = '#fff',
+    dbColor = "#fff",
     disabled,
-  } = props
+    type,
+  } = props;
 
   return (
     <ButtonStyle
@@ -37,15 +38,16 @@ export const Button = (props) => {
       disabledBackgroundColor={dbBgColor}
       disabledColor={dbColor}
       disabled={disabled}
+      type={type}
     >
       {children}
     </ButtonStyle>
-  )
-}
+  );
+};
 
 const ButtonStyle = styled.button`
   box-sizing: border-box;
-  font-family: 'Poppins';
+  font-family: "Poppins";
   font-style: normal;
   padding: ${(props) => props.padding};
 
@@ -79,4 +81,4 @@ const ButtonStyle = styled.button`
   }
 
   cursor: pointer;
-`
+`;
